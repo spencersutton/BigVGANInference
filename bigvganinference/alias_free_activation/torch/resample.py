@@ -1,13 +1,19 @@
 # Adapted from https://github.com/junjun3518/alias-free-torch under the Apache License 2.0
 #   LICENSE is in incl_licenses directory.
 
+from typing import TYPE_CHECKING
+
 from BigVGANInference.bigvganinference.alias_free_activation.torch.filter import LowPassFilter1d, kaiser_sinc_filter1d
 
+import torch
 import torch.nn as nn
 from torch.nn import functional as F
 
 
 class UpSample1d(nn.Module):
+    if TYPE_CHECKING:
+        filter: torch.Tensor
+
     def __init__(self, ratio=2, kernel_size=None):
         super().__init__()
         self.ratio = ratio

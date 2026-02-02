@@ -3,12 +3,16 @@
 
 import os
 import shutil
+from typing import Any
 
 
 class AttrDict(dict):
     def __init__(self, *args, **kwargs):
         super(AttrDict, self).__init__(*args, **kwargs)
         self.__dict__ = self
+
+    def __getattr__(self, key: Any) -> Any:
+        return super().__getattr__(key)
 
 
 def build_env(config, config_name, path):

@@ -2,12 +2,11 @@
 #   LICENSE is in incl_licenses directory.
 
 from .act import Activation1d
-from .filter import LowPassFilter1d, kaiser_sinc_filter1d, sinc
+from .filter import LowPassFilter1d, kaiser_sinc_filter1d
 from .resample import DownSample1d, UpSample1d
 
 __all__ = [
     "Activation1d",
-    "sinc",
     "LowPassFilter1d",
     "kaiser_sinc_filter1d",
     "UpSample1d",

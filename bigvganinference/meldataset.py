@@ -9,7 +9,6 @@ import os
 from librosa.filters import mel as librosa_mel_fn
 import numpy as np
 import torch
-import torch.utils.data
 
 MAX_WAV_VALUE = 32767.0  # NOTE: 32768.0 -1 to prevent int16 overflow (results in popping sound in corner cases)
 
@@ -50,7 +49,7 @@ def mel_spectrogram(
     hop_size: int,
     win_size: int,
     fmin: int,
-    fmax: int = None,
+    fmax: int | None = None,
     center: bool = False,
 ) -> torch.Tensor:
     """

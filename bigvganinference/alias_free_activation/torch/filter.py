@@ -2,6 +2,7 @@
 #   LICENSE is in incl_licenses directory.
 
 import math
+from typing import TYPE_CHECKING
 
 import torch
 import torch.nn as nn
@@ -45,6 +46,9 @@ def kaiser_sinc_filter1d(cutoff, half_width, kernel_size):  # return filter [1,1
 
 
 class LowPassFilter1d(nn.Module):
+    if TYPE_CHECKING:
+        filter: torch.Tensor
+
     def __init__(
         self,
         cutoff=0.5,

@@ -7,9 +7,11 @@
 # Further Adapted from https://github.com/NVIDIA/BigVGAN under the MIT license.
 
 
+from collections.abc import MutableSequence
 import json
 import os
 from pathlib import Path
+from typing import TYPE_CHECKING, cast
 
 import BigVGANInference.bigvganinference.activations as activations
 from BigVGANInference.bigvganinference.alias_free_activation.torch.act import (
@@ -48,8 +50,8 @@ class AMPBlock1(torch.nn.Module):
         h: AttrDict,
         channels: int,
         kernel_size: int = 3,
-        dilation: tuple = (1, 3, 5),
-        activation: str = None,
+        dilation: tuple[int, int, int] = (1, 3, 5),
+        activation: str | None = None,
     ):
         super().__init__()
 
@@ -149,8 +151,8 @@ class AMPBlock2(torch.nn.Module):
         h: AttrDict,
         channels: int,
         kernel_size: int = 3,
-        dilation: tuple = (1, 3, 5),
-        activation: str = None,
+        dilation: tuple[int, int, int] = (1, 3, 5),
+        activation: str | None = None,
     ):
         super().__init__()
 
@@ -233,6 +235,9 @@ class BigVGAN(
         - Ensure that the activation function is correctly specified in the hyperparameters (h.activation).
     """
 
+    if TYPE_CHECKING:
+        resblocks: MutableSequence[AMPBlock1 | AMPBlock2]
+
     def __init__(self, h: AttrDict, use_cuda_kernel: bool = False):
         super().__init__()
         self.h = h
@@ -282,13 +287,14 @@ class BigVGAN(
             )
 
         # Residual blocks using anti-aliased multi-periodicity composition modules (AMP)
-        self.resblocks = nn.ModuleList()
+        self.resblocks = cast(MutableSequence[AMPBlock1 | AMPBlock2], cast(object, nn.ModuleList()))
         for i in range(len(self.ups)):
             ch = h.upsample_initial_channel // (2 ** (i + 1))
             for j, (k, d) in enumerate(zip(h.resblock_kernel_sizes, h.resblock_dilation_sizes)):
                 self.resblocks.append(resblock_class(h, ch, k, d, activation=h.activation))
 
         # Post-conv
+        ch = 0
         activation_post = (
             activations.Snake(ch, alpha_logscale=h.snake_logscale)
             if h.activation == "snake"
@@ -326,6 +332,7 @@ class BigVGAN(
                     xs = self.resblocks[i * self.num_kernels + j](x)
                 else:
                     xs += self.resblocks[i * self.num_kernels + j](x)
+            assert xs is not None
             x = xs / self.num_kernels
 
         # Post-conv
@@ -372,10 +379,10 @@ class BigVGAN(
         revision: str,
         cache_dir: str,
         force_download: bool,
-        proxies: Optional[Dict],
+        proxies: dict[str, str] | None,
         resume_download: bool,
         local_files_only: bool,
-        token: Union[str, bool, None],
+        token: str | bool | None,
         map_location: str = "cpu",  # Additional argument
         strict: bool = False,  # Additional argument
         use_cuda_kernel: bool = False,

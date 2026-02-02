@@ -1,5 +1,4 @@
 from enum import Enum
-from typing import Dict, Optional, Union
 
 from BigVGANInference.bigvganinference.bigvgan import BigVGAN
 from BigVGANInference.bigvganinference.env import AttrDict
@@ -90,10 +89,10 @@ class BigVGANInference(BigVGAN):
         revision: str,
         cache_dir: str,
         force_download: bool,
-        proxies: Optional[Dict],
+        proxies: dict[str, str] | None,
         resume_download: bool,
         local_files_only: bool,
-        token: Union[str, bool, None],
+        token: str | bool | None,
         map_location: str = "cpu",  # Additional argument
         strict: bool = False,  # Additional argument
         use_cuda_kernel: bool = False,
