@@ -90,8 +90,6 @@ class BigVGANInference(BigVGAN):
         revision: str | None,
         cache_dir: str | Path | None,
         force_download: bool,
-        proxies: dict[str, str] | None,
-        resume_download: bool | None,
         local_files_only: bool,
         token: str | bool | None,
         map_location: str = "cpu",  # Additional argument
@@ -104,8 +102,6 @@ class BigVGANInference(BigVGAN):
             revision=revision,
             cache_dir=cache_dir,
             force_download=force_download,
-            proxies=proxies,
-            resume_download=resume_download,
             local_files_only=local_files_only,
             token=token,
             map_location=map_location,
