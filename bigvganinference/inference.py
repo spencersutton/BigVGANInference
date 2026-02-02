@@ -1,4 +1,5 @@
 from enum import Enum
+from pathlib import Path
 
 from BigVGANInference.bigvganinference.bigvgan import BigVGAN
 from BigVGANInference.bigvganinference.env import AttrDict
@@ -86,11 +87,11 @@ class BigVGANInference(BigVGAN):
         cls,
         *,
         model_id: str,
-        revision: str,
-        cache_dir: str,
+        revision: str | None,
+        cache_dir: str | Path | None,
         force_download: bool,
         proxies: dict[str, str] | None,
-        resume_download: bool,
+        resume_download: bool | None,
         local_files_only: bool,
         token: str | bool | None,
         map_location: str = "cpu",  # Additional argument
