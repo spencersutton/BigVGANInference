@@ -68,7 +68,7 @@ class BigVGANInference(BigVGAN):
 
         return mel
 
-    def forward(self, mel: torch.Tensor) -> torch.Tensor:
+    def forward(self, x: torch.Tensor) -> torch.Tensor:
         """
         Forward pass with inference mode enabled.
 
@@ -79,7 +79,7 @@ class BigVGANInference(BigVGAN):
             torch.Tensor: Generated audio waveform
         """
         with torch.inference_mode():
-            return super().forward(mel)
+            return super().forward(x)
 
     @classmethod
     def _from_pretrained(

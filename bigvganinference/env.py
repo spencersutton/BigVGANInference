@@ -6,7 +6,7 @@ import shutil
 from typing import Any
 
 
-class AttrDict(dict):
+class AttrDict(dict[str, Any]):
     def __init__(self, *args, **kwargs):
         super(AttrDict, self).__init__(*args, **kwargs)
         self.__dict__ = self

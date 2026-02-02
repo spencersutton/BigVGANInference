@@ -33,7 +33,7 @@ def kaiser_sinc_filter1d(cutoff, half_width, kernel_size):  # return filter [1,1
     else:
         time = torch.arange(kernel_size) - half_size
     if cutoff == 0:
-        filter_ = torch.zeros_like(time)
+        filter = torch.zeros_like(time)
     else:
         filter_ = 2 * cutoff * window * torch.sinc(2 * cutoff * time)
         """
