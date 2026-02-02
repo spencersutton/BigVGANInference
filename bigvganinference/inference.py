@@ -1,5 +1,6 @@
 from enum import Enum
 from pathlib import Path
+from typing import TYPE_CHECKING
 
 from BigVGANInference.bigvganinference.bigvgan import BigVGAN
 from BigVGANInference.bigvganinference.env import AttrDict
@@ -81,6 +82,11 @@ class BigVGANInference(BigVGAN):
         """
         with torch.inference_mode():
             return super().forward(x)
+
+    if TYPE_CHECKING:
+
+        def __call__(self, x: torch.Tensor) -> torch.Tensor:
+            return self.forward(x)
 
     @classmethod
     def _from_pretrained(
