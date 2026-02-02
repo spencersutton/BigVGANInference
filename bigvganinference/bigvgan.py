@@ -414,11 +414,11 @@ class BigVGAN(
             )
             print(
                 "[WARNING] You need nvcc and ninja installed in your system that matches your PyTorch build is using to build the kernel. "
-                "If not, the model will fail to initialize or generate incorrect waveform!"
+                + "If not, the model will fail to initialize or generate incorrect waveform!"
             )
             print(
                 "[WARNING] For detail, see the official GitHub repository: "
-                "https://github.com/NVIDIA/BigVGAN?tab=readme-ov-file#using-custom-cuda-kernel-for-synthesis"
+                + "https://github.com/NVIDIA/BigVGAN?tab=readme-ov-file#using-custom-cuda-kernel-for-synthesis"
             )
         model = cls(h, use_cuda_kernel=use_cuda_kernel)
 
