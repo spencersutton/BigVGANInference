@@ -2,7 +2,7 @@ from enum import Enum
 
 from BigVGANInference.bigvganinference.bigvgan import BigVGAN
 from BigVGANInference.bigvganinference.env import AttrDict
-from BigVGANInference.bigvganinference.meldataset import get_mel_spectrogram
+from indextts.s2mel.modules.audio import mel_spectrogram
 import numpy as np
 import torch
 
@@ -60,7 +60,7 @@ class BigVGANInference(BigVGAN):
         if wav.shape[0] > 1:
             wav = wav.mean(dim=0).unsqueeze(0)
 
-        mel = get_mel_spectrogram(wav, self.h)
+        mel = mel_spectrogram(wav)
 
         # ensure mel is on the same device as the model
         device = next(self.parameters()).device
