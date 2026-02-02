@@ -105,7 +105,6 @@ class BigVGANInference(BigVGAN):
             local_files_only=local_files_only,
             token=token,
             map_location=map_location,
-            strict=strict,
             use_cuda_kernel=use_cuda_kernel,
             **model_kwargs,
         )

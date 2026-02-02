@@ -8,11 +8,14 @@ from typing import Any
 
 class AttrDict(dict[str, Any]):
     def __init__(self, *args, **kwargs):
-        super(AttrDict, self).__init__(*args, **kwargs)
+        super().__init__(*args, **kwargs)
         self.__dict__ = self
 
     def __getattr__(self, key: Any) -> Any:
-        return super().__getattr__(key)
+        try:
+            return self[key]
+        except KeyError as exc:
+            raise AttributeError(key) from exc
 
 
 def build_env(config, config_name, path):

@@ -387,9 +387,7 @@ class BigVGAN(
         local_files_only: bool,
         token: str | bool | None,
         map_location: str = "cpu",  # Additional argument
-        strict: bool = False,  # Additional argument
         use_cuda_kernel: bool = False,
-        **model_kwargs,
     ):
         """Load Pytorch pretrained weights and return the loaded model."""
 
