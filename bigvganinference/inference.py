@@ -1,12 +1,11 @@
 from enum import Enum
 from typing import Dict, Optional, Union
 
+from BigVGANInference.bigvganinference.bigvgan import BigVGAN
+from BigVGANInference.bigvganinference.env import AttrDict
+from BigVGANInference.bigvganinference.meldataset import get_mel_spectrogram
 import numpy as np
 import torch
-
-from bigvganinference.bigvgan import BigVGAN
-from bigvganinference.env import AttrDict
-from bigvganinference.meldataset import get_mel_spectrogram
 
 
 class BigVGANHFModel(str, Enum):

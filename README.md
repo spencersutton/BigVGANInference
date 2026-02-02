@@ -23,7 +23,7 @@ poetry install
 
 Loading model is as simple as:
 ```python
-from bigvganinference import BigVGANInference
+from BigVGANInference.bigvganinference import BigVGANInference
 
 # -- model loading ---
 

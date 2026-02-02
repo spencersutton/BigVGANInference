@@ -1,6 +1,5 @@
+from BigVGANInference.bigvganinference import BigVGANHFModel, BigVGANInference
 import librosa
-
-from bigvganinference import BigVGANHFModel, BigVGANInference
 
 # -- model loading ---
 model = BigVGANInference.from_pretrained(BigVGANHFModel.V2_22KHZ_80BAND_FMAX8K_256X, use_cuda_kernel=False)

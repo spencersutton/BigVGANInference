@@ -4,11 +4,10 @@
 import glob
 import os
 
+from BigVGANInference.bigvganinference.meldataset import MAX_WAV_VALUE
 from scipy.io.wavfile import write
 import torch
 from torch.nn.utils import weight_norm
-
-from bigvganinference.meldataset import MAX_WAV_VALUE
 
 
 def init_weights(m, mean=0.0, std=0.01):

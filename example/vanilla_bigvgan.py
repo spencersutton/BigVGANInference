@@ -1,8 +1,7 @@
+from BigVGANInference.bigvganinference import bigvgan
+from BigVGANInference.bigvganinference.meldataset import get_mel_spectrogram
 import librosa
 import torch
-
-from bigvganinference import bigvgan
-from bigvganinference.meldataset import get_mel_spectrogram
 
 # instantiate the model. You can optionally set use_cuda_kernel=True for faster inference.
 model = bigvgan.BigVGAN.from_pretrained("nvidia/bigvgan_v2_24khz_100band_256x", use_cuda_kernel=False)

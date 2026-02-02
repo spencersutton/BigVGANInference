@@ -5,8 +5,8 @@ import torch
 import torch.nn as nn
 
 # load fused CUDA kernel: this enables importing anti_alias_activation_cuda
-from bigvganinference.alias_free_activation.cuda import load
-from bigvganinference.alias_free_activation.torch.resample import (
+from BigVGANInference.bigvganinference.alias_free_activation.cuda import load
+from BigVGANInference.bigvganinference.alias_free_activation.torch.resample import (
     DownSample1d,
     UpSample1d,
 )
