@@ -294,7 +294,12 @@ class BigVGAN(
                 self.resblocks.append(resblock_class(h, ch, k, d, activation=h.activation))
 
         # Post-conv
-        ch = 0
+        # Channel count after the last upsampling stage.
+        # Each upsample step halves the channel dimension.
+        # NOTE: This must match the final feature map produced by the upsamplers,
+        # otherwise loading pretrained checkpoints will fail (e.g. SnakeBeta params
+        # become shape [0]).
+        ch = h.upsample_initial_channel // (2**self.num_upsamples)
         activation_post = (
             activations.Snake(ch, alpha_logscale=h.snake_logscale)
             if h.activation == "snake"
