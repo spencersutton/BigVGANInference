@@ -2,6 +2,8 @@
 #   Licensed under the MIT license.
 
 # load fused CUDA kernel: this enables importing anti_alias_activation_cuda
+from typing import Any
+
 from BigVGANInference.bigvganinference.alias_free_activation.cuda import load
 from BigVGANInference.bigvganinference.alias_free_activation.torch.resample import (
     DownSample1d,
@@ -10,7 +12,7 @@ from BigVGANInference.bigvganinference.alias_free_activation.torch.resample impo
 import torch
 import torch.nn as nn
 
-anti_alias_activation_cuda = load.load()
+anti_alias_activation_cuda: Any = load.load()
 
 
 class FusedAntiAliasActivation(torch.autograd.Function):
