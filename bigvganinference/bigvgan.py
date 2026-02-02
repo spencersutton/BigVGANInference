@@ -10,7 +10,6 @@
 import json
 import os
 from pathlib import Path
-from typing import Dict, Optional, Union
 
 import BigVGANInference.bigvganinference.activations as activations
 from BigVGANInference.bigvganinference.alias_free_activation.torch.act import (
@@ -405,8 +404,7 @@ class BigVGAN(
         # instantiate BigVGAN using h
         if use_cuda_kernel:
             print(
-                "[WARNING] You have specified use_cuda_kernel=True during BigVGAN.from_pretrained(). "
-                "Only inference is supported (training is not implemented)!"
+                "[WARNING] You have specified use_cuda_kernel=True during BigVGAN.from_pretrained(). Only inference is supported (training is not implemented)!"
             )
             print(
                 "[WARNING] You need nvcc and ninja installed in your system that matches your PyTorch build is using to build the kernel. "
@@ -441,7 +439,7 @@ class BigVGAN(
         try:
             model.load_state_dict(checkpoint_dict["generator"])
         except RuntimeError:
-            print("[INFO] the pretrained checkpoint does not contain weight norm. " "Loading the checkpoint after removing weight norm!")
+            print("[INFO] the pretrained checkpoint does not contain weight norm. Loading the checkpoint after removing weight norm!")
             model.remove_weight_norm()
             model.load_state_dict(checkpoint_dict["generator"])
 

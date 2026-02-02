@@ -4,8 +4,6 @@
 import glob
 import os
 
-from BigVGANInference.bigvganinference.meldataset import MAX_WAV_VALUE
-from scipy.io.wavfile import write
 import torch
 from torch.nn.utils import weight_norm
 
@@ -58,10 +56,3 @@ def scan_checkpoint(cp_dir, prefix, renamed_file=None):
             return renamed_path
 
     return None
-
-
-def save_audio(audio, path, sr):
-    # wav: torch with 1d shape
-    audio = audio * MAX_WAV_VALUE
-    audio = audio.cpu().numpy().astype("int16")
-    write(path, sr, audio)
