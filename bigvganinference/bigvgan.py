@@ -268,7 +268,7 @@ class BigVGAN(
             raise ValueError(f"Incorrect resblock class specified in hyperparameters. Got {h.resblock}")
 
         # Transposed conv-based upsamplers. does not apply anti-aliasing
-        self.ups = nn.ModuleList()
+        self.ups: nn.ModuleList[nn.ModuleList[ConvTranspose1d]] = nn.ModuleList()
         for i, (u, k) in enumerate(zip(h.upsample_rates, h.upsample_kernel_sizes)):
             self.ups.append(
                 nn.ModuleList(
