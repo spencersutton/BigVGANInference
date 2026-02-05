@@ -18,7 +18,7 @@ os.environ["TORCH_CUDA_ARCH_LIST"] = ""
 def load():
     # Check if cuda 11 is installed for compute capability 8.0
     cc_flag = []
-    _, bare_metal_major, _ = _get_cuda_bare_metal_version(cpp_extension.CUDA_HOME)  # pyright: ignore
+    _, bare_metal_major, _ = _get_cuda_bare_metal_version(cpp_extension.CUDA_HOME)
     if int(bare_metal_major) >= 11:
         cc_flag.append("-gencode")
         cc_flag.append("arch=compute_80,code=sm_80")
